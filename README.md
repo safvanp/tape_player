@@ -1,6 +1,6 @@
 # tape_player
 
-A new Flutter project.
+A new flutter project of nostalgic music player.
 
 ## Getting Started
 
