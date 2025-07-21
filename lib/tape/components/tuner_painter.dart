@@ -28,22 +28,22 @@ class TunerPainter extends CustomPainter {
     _initLineTuner();
   }
 
-  void _initHoles() {
-    leftHolePosition = Offset(size.width * 0.3, size.height * 0.46);
-    rightHolePosition = Offset(size.width * 0.7, size.height * 0.46);
+  // void _initHoles() {
+  //   leftHolePosition = Offset(size.width * 0.3, size.height * 0.46);
+  //   rightHolePosition = Offset(size.width * 0.7, size.height * 0.46);
 
-    leftHole = Path()
-      ..addOval(Rect.fromCircle(center: leftHolePosition, radius: holeRadius));
+  //   leftHole = Path()
+  //     ..addOval(Rect.fromCircle(center: leftHolePosition, radius: holeRadius));
 
-    rightHole = Path()
-      ..addOval(Rect.fromCircle(center: rightHolePosition, radius: holeRadius));
-  }
+  //   rightHole = Path()
+  //     ..addOval(Rect.fromCircle(center: rightHolePosition, radius: holeRadius));
+  // }
 
-  void _initCenterWindow() {
-    Rect centerWindow = Rect.fromLTRB(size.width * 0.4, size.height * 0.37,
-        size.width * 0.6, size.height * 0.55);
-    centerWindowPath = Path()..addRect(centerWindow);
-  }
+  // void _initCenterWindow() {
+  //   Rect centerWindow = Rect.fromLTRB(size.width * 0.4, size.height * 0.37,
+  //       size.width * 0.6, size.height * 0.55);
+  //   centerWindowPath = Path()..addRect(centerWindow);
+  // }
 
   // void _drawTape() {
   //   RRect tape = RRect.fromRectAndRadius(

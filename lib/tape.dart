@@ -415,7 +415,7 @@ class _TapeState extends State<Tape> with SingleTickerProviderStateMixin {
       final info = await MetadataRetriever.fromFile(File(path));
       setState(() => title = _buildTitle(info));
     } catch (ex) {
-      debugPrint("Play error: $ex");
+      // ("Play error: $ex");
     }
   }
 

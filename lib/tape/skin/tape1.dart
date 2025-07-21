@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-import 'dart:math';
-import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class CassetteAudioPlayer extends StatefulWidget {
+  const CassetteAudioPlayer({super.key});
+
   @override
   _CassetteAudioPlayerState createState() => _CassetteAudioPlayerState();
 }

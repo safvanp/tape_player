@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart'; // Import Hive
 import 'package:tape_player/home.dart';
-import 'package:tape_player/tape/skin/tape1.dart';
 
 void main() async {
   // Ensure Flutter binding is initialized for async operations before runApp
