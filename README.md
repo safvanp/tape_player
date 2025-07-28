@@ -1,16 +1,34 @@
-# tape_player
+# 🎵 Tape Player
 
-A new flutter project of nostalgic music player.
+A **nostalgic cassette-style music player** built with Flutter.  
+Experience your favorite tracks with retro visuals, spinning reels, scrolling labels, and customizable cassette skins.
 
-## Getting Started
+📲 **[Download on Google Play](https://play.google.com/store/apps/details?id=com.safvanp.tape_player&pcampaignid=web_share)**
 
-This project is a starting point for a Flutter application.
+![Tape Player Screenshot](screenshots/Screenshot_light.png) <!-- Replace with actual path if different -->
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ✨ Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 🎞️ Retro cassette tape UI  
+- 🔁 Animated reels and scrolling labels  
+- 🎨 Multiple cassette skins  
+- 🌗 Light & dark theme support  
+- 🎵 Lyrics display support *(coming soon)*  
+- ↔️ Landscape layout with tape Side A/B toggle
+
+---
+
+## 🚀 Getting Started (for Developers)
+
+To build and run this Flutter app locally:
+
+1. **Install Flutter**  
+   Follow the [Flutter Installation Guide](https://docs.flutter.dev/get-started/install)
+
+2. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/safvanp/tape_player.git
+   cd tape_player

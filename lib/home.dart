@@ -1,4 +1,3 @@
-// home.dart
 import 'package:flutter/material.dart';
 import 'package:tape_player/tape.dart'; // Assuming tape.dart is in lib/tape.dart
 
@@ -26,8 +25,10 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Tape(),
+      body: const SafeArea(
+        child: Center(
+          child: Tape(),
+        ),
       ),
     );
   }

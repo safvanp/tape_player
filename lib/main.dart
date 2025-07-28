@@ -1,15 +1,28 @@
-// main.dart
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart'; // Import Hive
+import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tape_player/home.dart';
 
 void main() async {
-  // Ensure Flutter binding is initialized for async operations before runApp
   WidgetsFlutterBinding.ensureInitialized();
+
+  // ✅ Enable edge-to-edge system UI
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+  // ✅ Use transparent system UI with correct brightness
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarDividerColor: Colors.transparent,
+    statusBarIconBrightness:
+        Brightness.dark, // Or Brightness.light for dark background
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
+
   // Initialize Hive
   await Hive.initFlutter();
-  // Open a box to store your list of music file paths
   await Hive.openBox<List<String>>('music_playlist_box');
+
   runApp(const MyApp());
 }
 

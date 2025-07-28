@@ -159,111 +159,116 @@ class _TapeState extends State<Tape> with SingleTickerProviderStateMixin {
 
     // Otherwise, show the main tape player UI
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Tape Display Area
-            SizedBox(
-              width: 300,
-              height: 200,
-              child: CustomPaint(
-                painter: TapePainter(
-                  rotationValue: animationController.value,
-                  title: title ?? '',
-                  progress: currentPosition,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Tape Display Area
+              SizedBox(
+                width: 300,
+                height: 200,
+                child: CustomPaint(
+                  painter: TapePainter(
+                    rotationValue: animationController.value,
+                    title: title ?? '',
+                    progress: currentPosition,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TapeButton(
-                    icon: Icons.skip_previous,
-                    onTap: previous,
-                    isTapped: false),
-                TapeButton(
-                    icon: Icons.play_arrow,
-                    onTap: play,
-                    isTapped: tapeStatus == TapeStatus.playing),
-                TapeButton(
-                    icon: Icons.pause,
-                    onTap: pause,
-                    isTapped: tapeStatus == TapeStatus.pausing),
-                TapeButton(
-                    icon: Icons.stop,
-                    onTap: stop,
-                    isTapped: tapeStatus == TapeStatus.stopping),
-                TapeButton(
-                    icon: Icons.folder_open, // Regular button to add more music
-                    onTap: () => choose(isInitialScan: false),
-                    isTapped: tapeStatus == TapeStatus.choosing),
-                TapeButton(icon: Icons.skip_next, onTap: next, isTapped: false),
-              ],
-            ),
-            const SizedBox(height: 10),
-
-            // Scrolling Title Display
-            SizedBox(
-              height: 30,
-              width: 300,
-              child: Marquee(
-                text: title ?? "No track selected",
-                style: const TextStyle(fontSize: 10),
-                scrollAxis: Axis.horizontal,
-                blankSpace: 40.0,
-                velocity: 30.0,
-                pauseAfterRound: const Duration(seconds: 1),
-                startPadding: 10.0,
-              ),
-            ),
-
-            // Progress Slider and Duration Text
-            SizedBox(
-              width: 300,
-              height: 80,
-              child: Column(
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Slider(
-                    min: 0.0,
-                    max: totalDuration.inMilliseconds.toDouble(),
-                    value: currentDuration.inMilliseconds
-                        .clamp(0.0, totalDuration.inMilliseconds.toDouble())
-                        .toDouble(),
-                    onChanged: (value) {
-                      final position = Duration(milliseconds: value.toInt());
-                      audioPlayer.seek(position);
-                    },
+                  TapeButton(
+                      icon: Icons.skip_previous,
+                      onTap: previous,
+                      isTapped: false),
+                  TapeButton(
+                      icon: Icons.play_arrow,
+                      onTap: play,
+                      isTapped: tapeStatus == TapeStatus.playing),
+                  TapeButton(
+                      icon: Icons.pause,
+                      onTap: pause,
+                      isTapped: tapeStatus == TapeStatus.pausing),
+                  TapeButton(
+                      icon: Icons.stop,
+                      onTap: stop,
+                      isTapped: tapeStatus == TapeStatus.stopping),
+                  TapeButton(
+                      icon:
+                          Icons.folder_open, // Regular button to add more music
+                      onTap: () => choose(isInitialScan: false),
+                      isTapped: tapeStatus == TapeStatus.choosing),
+                  TapeButton(
+                      icon: Icons.skip_next, onTap: next, isTapped: false),
+                ],
+              ),
+              const SizedBox(height: 10),
+
+              // Scrolling Title Display
+              SizedBox(
+                height: 30,
+                width: 300,
+                child: Marquee(
+                  text: title ?? "No track selected",
+                  style: const TextStyle(fontSize: 10),
+                  scrollAxis: Axis.horizontal,
+                  blankSpace: 40.0,
+                  velocity: 30.0,
+                  pauseAfterRound: const Duration(seconds: 1),
+                  startPadding: 10.0,
+                ),
+              ),
+
+              // Progress Slider and Duration Text
+              SizedBox(
+                width: 300,
+                height: 80,
+                child: Column(
+                  children: [
+                    Slider(
+                      min: 0.0,
+                      max: totalDuration.inMilliseconds.toDouble(),
+                      value: currentDuration.inMilliseconds
+                          .clamp(0.0, totalDuration.inMilliseconds.toDouble())
+                          .toDouble(),
+                      onChanged: (value) {
+                        final position = Duration(milliseconds: value.toInt());
+                        audioPlayer.seek(position);
+                      },
+                    ),
+                    Text(
+                      "${_formatDuration(currentDuration)} / ${_formatDuration(totalDuration)}",
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Playlist and Repeat Mode Buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(showPlaylist
+                        ? Icons.playlist_add_check
+                        : Icons.playlist_play),
+                    onPressed: () =>
+                        setState(() => showPlaylist = !showPlaylist),
                   ),
-                  Text(
-                    "${_formatDuration(currentDuration)} / ${_formatDuration(totalDuration)}",
-                    style: const TextStyle(fontSize: 12),
+                  IconButton(
+                    icon: Icon(_repeatIcon()),
+                    onPressed: _toggleRepeatMode,
                   ),
                 ],
               ),
-            ),
 
-            // Playlist and Repeat Mode Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(showPlaylist
-                      ? Icons.playlist_add_check
-                      : Icons.playlist_play),
-                  onPressed: () => setState(() => showPlaylist = !showPlaylist),
-                ),
-                IconButton(
-                  icon: Icon(_repeatIcon()),
-                  onPressed: _toggleRepeatMode,
-                ),
-              ],
-            ),
-
-            // Conditional Playlist Widget Display
-            _buildPlaylist(),
-          ],
+              // Conditional Playlist Widget Display
+              _buildPlaylist(),
+            ],
+          ),
         ),
       ),
     );
